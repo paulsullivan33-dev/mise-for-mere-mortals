@@ -1,0 +1,131 @@
+The lab — one real install, one machine, five small projects
+====================================================================
+
+The lab is mise as its project ships it: the
+official release binary for Linux x64, mise
+2026.10.21, downloaded from the project's
+GitHub releases into a scratch folder on the
+build machine (an Ubuntu sandbox) and run
+from there. Nothing was installed system-wide;
+the tools mise itself installed went where
+mise always puts them, under
+~/.local/share/mise.
+
+  * Node through mise's core backend, which
+    downloads the prebuilt archives from
+    nodejs.org: 22.23.4 (set as the global
+    default), 20.20.2, 20.19.0 and 18.20.8.
+  * ripgrep 14.1.1 through the aqua backend,
+    which downloads the project's own release
+    archive from GitHub.
+  * Five fixture projects of the guide's own
+    invention, in mise-lab/projects/:
+    inventory-api (Node 20, an [env] entry),
+    report-generator (Node 22, two tasks in
+    mise.toml, one file task), legacy-project
+    (an asdf-style .tool-versions file),
+    pinned-project (Node pinned to the exact
+    20.19.0) and future-project (Node 18).
+
+What the lab ran, in
+mise-lab/transcripts/:
+
+  * t00 mise --version and mise doctor: the
+    version, the directories mise keeps, the
+    list of backends baked into the binary,
+    "No problems found".
+  * t01 the first tool: mise use --global
+    node@22, the global config it wrote,
+    mise ls, and Node and npm answering
+    through mise exec.
+  * t02 a second version of Node (20.20.2)
+    and a second backend: ripgrep through
+    aqua, located with mise which, run with
+    mise exec.
+  * t03 the project pins: the two fixture
+    mise.toml files, mise current inside a
+    project, the pin still applying two
+    folders deeper, and mise config listing
+    the files in play.
+  * t04 switching with shims: with the shims
+    directory on PATH, node --version
+    answers 22.23.4 at home, 20.20.2 in
+    inventory-api, 22.23.4 in
+    report-generator, 22.23.4 back home —
+    no command run in between.
+  * t05 the same dance in an interactive
+    bash with shell activation instead of
+    shims (session recorded with `script`;
+    prompts trimmed).
+  * t06 tasks: mise tasks lists the two
+    mise.toml tasks and the file task;
+    mise run report runs its dependency
+    (check) first, then the report;
+    mise run tidy runs the file task.
+  * t07 environment: mise env shows the
+    export line for the project's [env]
+    entry, and the variable is present
+    inside mise exec.
+  * t08 the legacy file: a .tool-versions
+    reading "nodejs 20" is honoured —
+    mise current and the shim both land on
+    20.20.2.
+  * t09 keeping current: in pinned-project,
+    mise outdated reports everything up to
+    date inside its range, and
+    mise outdated --bump shows how far a
+    bump would go (Node 20.19.0 to the
+    newest 26.12.1; ripgrep 14 to 15.2.0).
+  * t10 auto-install: with Node 18 removed,
+    asking the shim for node inside
+    future-project downloads and installs
+    18.20.8 on the spot, then answers.
+  * t11 trust: a mise.toml carrying [env]
+    that mise did not write itself is
+    refused — "not trusted" — until
+    mise trust is run in the project; a
+    [tools]-only config is read without
+    complaint.
+
+The sandbox's rules, discovered by
+running into them:
+
+  * The fixture mise.toml files were
+    written by an editor, not by mise, so
+    the one carrying [env] was refused as
+    untrusted until mise trust. A project's
+    config can run commands (tasks, hooks,
+    env templates), so mise makes you say
+    "I trust this one" first — the same
+    shape as direnv's allow. Chapter 5
+    teaches it as a step, not a surprise.
+  * File tasks must be executable. The
+    tidy task was invisible to mise tasks
+    until chmod +x — no error, just
+    absent. Chapter 15 has the entry.
+  * Node prints an experimental-proxy
+    warning on this sandbox (its own
+    environment variable, nothing to do
+    with mise). The transcripts omit that
+    one stderr line where it appeared;
+    everything else is as captured.
+
+Documented only (described from mise's
+documentation, not run, and labelled in
+the text): the other install routes
+(the mise.run installer script, operating
+system packages, mise self-update);
+zsh, fish and PowerShell activation;
+Python and the other tools mise compiles
+from source by default, and their
+prebuilt variants; the asdf plugin
+backend's third-party plugins; the
+github, ubi, cargo, npm, pypi and other
+backends beyond the core and aqua ones
+exercised; environment-variable
+templates and config hooks; generating
+devcontainer and CI configuration;
+Windows behaviour — the lab is a Linux
+machine, and mise's Windows support is
+described from the docs, including that
+shims there are a newer addition.

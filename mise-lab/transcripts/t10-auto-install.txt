@@ -1,0 +1,10 @@
+The lab first removed Node 18 (mise uninstall node@18.20.8)
+so this project, which pins Node 18, had nothing to run.
+Then, with the shims directory on PATH:
+
+$ cat mise-lab/projects/future-project/mise.toml
+[tools]
+node = "18"
+$ cd mise-lab/projects/future-project && node --version
+mise ✓ node@18.20.8  node-v18.20.8-linux-x64.tar.gz
+v18.20.8

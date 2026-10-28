@@ -1,0 +1,43 @@
+$ mise --version
+2026.10.21 linux-x64 (2026-10-27)
+$ mise doctor
+version: 2026.10.21 linux-x64 (2026-10-27)
+activated: no
+shims_on_path: yes
+
+dirs:
+  cache: ~/.cache/mise
+  config: ~/.config/mise
+  data: ~/.local/share/mise
+  shims: ~/.local/share/mise/shims
+
+config_files:
+  ~/.config/mise/config.toml
+
+backends:
+  aqua
+  asdf
+  cargo
+  conda
+  core
+  dotnet
+  forgejo
+  gem
+  github
+  gitlab
+  go
+  npm
+  packslip
+  pypi
+  spinel
+  spm
+  http
+  s3
+  ubi
+  vfox
+
+toolset:
+  aqua:BurntSushi/ripgrep@14.1.1
+  core:node@22.23.4
+
+No problems found

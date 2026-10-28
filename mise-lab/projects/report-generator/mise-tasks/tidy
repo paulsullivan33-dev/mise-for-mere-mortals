@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# A file task: anything executable in mise-tasks/ becomes a task.
+echo "Tidying generated files..."

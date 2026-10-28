@@ -1,0 +1,4 @@
+$ cd mise-lab/projects/inventory-api && mise env
+export INVENTORY_ENV=demonstration
+$ mise exec -- printenv INVENTORY_ENV
+demonstration

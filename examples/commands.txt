@@ -1,0 +1,64 @@
+mise — the distilled commands
+====================================================================
+Placeholders: <tool> is a tool name
+(node, python, go...); <project> is one of
+your project folders.
+
+FIRST CONTACT (chapters 3-4)
+--------------------------------------------------------------------
+  mise --version
+  mise doctor                      # layout, backends, problems
+  mise use --global node@22        # install + set global default
+  cat ~/.config/mise/config.toml   # the global config it wrote
+  mise exec -- node --version      # run a tool without setup
+  mise ls                          # what is installed
+
+PINNING PER PROJECT (chapters 5-6)
+--------------------------------------------------------------------
+  cd <project>
+  mise use node@20                 # writes ./mise.toml
+  mise install                     # install whatever is pinned
+  mise current                     # what applies here (all tools)
+  mise current node                # one tool's resolved version
+  mise which node                  # the real binary mise will run
+  mise config                      # the config files in play
+  mise trust                       # approve a config you did not
+                                   # write with mise (chapter 5)
+
+SWITCHING (chapter 10)
+--------------------------------------------------------------------
+  # shims: one line in your shell setup, then nothing to do
+  export PATH="$HOME/.local/share/mise/shims:$PATH"
+
+  # or activation, per shell:
+  eval "$(mise activate bash)"     # zsh, fish: same idea
+
+  # or neither: ask mise to run it
+  mise exec -- node --version
+  mise exec node@20 -- node --version
+                                   # a one-off version override
+
+KEEPING CURRENT (chapter 11)
+--------------------------------------------------------------------
+  mise ls-remote node              # versions that exist
+  mise outdated                    # behind, inside your ranges
+  mise outdated --bump             # how far a bump would go
+  mise upgrade                     # move pins to newest in range
+  mise uninstall node@18.20.8      # remove one installed version
+  mise prune                       # remove unused versions
+
+TASKS AND ENVIRONMENT (chapters 8-9)
+--------------------------------------------------------------------
+  mise tasks                       # tasks this project defines
+  mise run report                  # run one (deps first)
+  mise run                         # interactive picker, in a tty
+  mise env                         # the exports for this folder
+  mise env --json                  # same, machine-readable
+
+OTHER BACKENDS (chapter 7)
+--------------------------------------------------------------------
+  mise use --global aqua:BurntSushi/ripgrep@14
+                                   # any tool in the aqua registry
+  mise use --global github:owner/repo
+                                   # a GitHub release (docs)
+  mise registry                    # short names mise knows

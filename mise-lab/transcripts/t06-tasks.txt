@@ -1,0 +1,13 @@
+$ cd mise-lab/projects/report-generator && mise tasks
+check   Show the Node version this project is pinned to
+report  Generate the summary report
+tidy
+$ mise run report
+[check] $ node --version
+v22.23.4
+[report] $ node report.js
+Report: 3 product lines counted.
+Generated with Node v22.23.4.
+$ mise run tidy
+[tidy] $ ~/workspace/mise-for-mere-mortals/mise-lab/projects/report-generator/mise-tasks/tidy
+Tidying generated files...

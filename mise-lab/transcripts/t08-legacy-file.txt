@@ -1,0 +1,6 @@
+$ cat mise-lab/projects/legacy-project/.tool-versions
+nodejs 20
+$ cd mise-lab/projects/legacy-project && mise current node
+20.20.2
+$ node --version
+v20.20.2

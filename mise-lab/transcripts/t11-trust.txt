@@ -1,0 +1,15 @@
+What happens when mise meets a project config it did not
+write itself and has never been told to trust. (A config
+with only [tools] pins is read without complaint; the
+refusal below is about the parts that can act — [env],
+tasks, hooks.)
+
+$ cd mise-lab/projects/inventory-api && mise current
+mise ERROR error parsing config file: ~/workspace/mise-for-mere-mortals/mise-lab/projects/inventory-api/mise.toml
+mise ERROR Config files in ~/workspace/mise-for-mere-mortals/mise-lab/projects/inventory-api/mise.toml are not trusted.
+Trust them with `mise trust`. See https://mise.jdx.dev/cli/trust.html for more information.
+$ mise trust
+mise trusted ~/workspace/mise-for-mere-mortals/mise-lab/projects/inventory-api
+$ mise current
+node 20.20.2
+aqua:BurntSushi/ripgrep 14.1.1

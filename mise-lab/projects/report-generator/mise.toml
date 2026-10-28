@@ -1,0 +1,11 @@
+[tools]
+node = "22"
+
+[tasks.check]
+description = "Show the Node version this project is pinned to"
+run = "node --version"
+
+[tasks.report]
+description = "Generate the summary report"
+depends = ["check"]
+run = "node report.js"

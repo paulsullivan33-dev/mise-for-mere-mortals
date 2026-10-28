@@ -1,0 +1,10 @@
+$ mise install node@20
+mise node@20.20.2 10.8.2
+mise ✓ node@20.20.2  29.1s  node-v20.20.2-linux-x64.tar.gz
+$ mise use --global aqua:BurntSushi/ripgrep@14
+mise ✓ aqua:BurntSushi/ripgrep@14.1.1  9.1s  ripgrep-14.1.1-x86_64-unknown-linux-musl.tar.gz
+mise ~/.config/mise/config.toml tools: aqua:BurntSushi/ripgrep@14.1.1
+$ mise which rg
+/home/hatch/.local/share/mise/installs/aqua-burnt-sushi-ripgrep/14/ripgrep-14.1.1-x86_64-unknown-linux-musl/rg
+$ mise exec -- rg --version
+ripgrep 14.1.1 (rev 4649aa9700)

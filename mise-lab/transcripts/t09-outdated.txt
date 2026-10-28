@@ -1,0 +1,16 @@
+$ cat mise-lab/projects/pinned-project/mise.toml
+[tools]
+node = "20.19.0"
+$ cd mise-lab/projects/pinned-project && mise install
+mise ✓ node@20.19.0  node-v20.19.0-linux-x64.tar.gz
+$ mise outdated
+mise All tools are up to date
+mise Newer versions are available outside the configured version ranges. Use `mise outdated --bump` to view them.
+$ mise outdated --bump
+node                     20.19.0  20.19.0  26.12.1  26.12.1 ~/workspace/mise-for-mere-mortals/mise-lab/projects/pinned-project/mise.toml
+aqua:BurntSushi/ripgrep  14       14.1.1   15       15.2.0  ~/.config/mise/config.toml
+$ mise ls-remote node | tail -4
+26.11.0
+26.11.1
+26.12.0
+26.12.1

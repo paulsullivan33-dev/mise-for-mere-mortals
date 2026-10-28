@@ -1,0 +1,27 @@
+$ cat inventory-api/mise.toml
+[tools]
+node = "20"
+
+[env]
+INVENTORY_ENV = "demonstration"
+$ cat report-generator/mise.toml
+[tools]
+node = "22"
+
+[tasks.check]
+description = "Show the Node version this project is pinned to"
+run = "node --version"
+
+[tasks.report]
+description = "Generate the summary report"
+depends = ["check"]
+run = "node report.js"
+$ cd inventory-api && mise current
+node 20.20.2
+aqua:BurntSushi/ripgrep 14.1.1
+$ cd inventory-api/src/deep && mise current node && node --version
+20.20.2
+v20.20.2
+$ cd inventory-api && mise config
+~/.config/mise/config.toml  aqua:BurntSushi/ripgrep, node
+~/workspace/mise-for-mere-mortals/mise-lab/projects/inventory-api/mise.toml  node
